@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+tweetArray = [
+    "https://steadyhq.com/de/luhzeleipzig - Du liest gerne luhze - Leipzigs unabhängige Hochschulzeitung und trinkst dabei Kräutertee? Dann unterstütze uns mit 3 Euro pro Monat auf Steady.",
+    "https://steadyhq.com/de/luhzeleipzig - Du liest gerne luhze - Leipzigs unabhängige Hochschulzeitung und trinkst dabei Kaffee? Dann unterstütze uns mit 5 Euro pro Monat auf Steady.",
+    "https://steadyhq.com/de/luhzeleipzig - Du liest gerne luhze - Leipzigs unabhängige Hochschulzeitung und trinkst dabei Wein? Dann unterstütze uns mit 10 Euro pro Monat auf Steady.",
+    "https://steadyhq.com/de/luhzeleipzig - Kräutertee, Kaffee und Wein haben auf den ersten Blick nicht viel gemeinsam. Auf den zweiten unterstützen sie luhze bei ihrer Arbeit: unabhängigen Hochschuljournalismus von Studierenden für Studierende kostenlos zu produzieren.",
+    "Nie wieder Angst vor geistiger Dehydration! Unterstütze luhze auf Steady mit einem Kräutertee-, Kaffee- oder Wein-Abo. https://steadyhq.com/de/luhzeleipzig",
+    "https://steadyhq.com/de/luhzeleipzig - Du willst hinter die Kulissen schauen und wissen, was in der Redaktion passiert? Dann unterstütze uns mit 3€ pro Monat auf Steady und erhalte als Dankeschön unseren Newsletter.",
+    "https://steadyhq.com/de/luhzeleipzig - Du kannst es nicht erwarten, die neue luhze-Ausgabe zu lesen? Dann unterstütze uns mit 3€ pro Monat auf Steady und erhalte das PDF der Ausgabe zwei Tage vor dem offiziellen Erscheinungstermin.",
+    "https://steadyhq.com/de/luhzeleipzig - Du willst luhze in deinem Briefkasten? Dann unterstütze uns mit 5€ pro Monat auf Steady und nutze unseren exklusiven Verteilservice. (Achtung: nur innerhalb Leipzigs.)",
+    "https://steadyhq.com/de/luhzeleipzig - Ohne Kaffee würde kaum jemand von uns die langen Nächte von Endredaktion und Recherchen überstehen. Mit dem gleichnamigen Paket sorgst du dafür, dass luhze weiterhin so sorgfältig arbeiten kann, wie wir es seit 20 Jahren tun.",
+    "https://steadyhq.com/de/luhzeleipzig - Ohne v, i, n und o ließe sich Innovation nicht schreiben: Gerade beim gemütlichen Zusammensitzen mit einer Flasche Wein entstehen die besten Ideen. Deine Unterstützung mit dem Wein-Paket hilft uns dabei, luhze weiterzuentwickeln.",
+    "https://steadyhq.com/de/luhzeleipzig - Mit dem Kräutertee-Paket hältst du uns am Laufen – so wie es kannenweise Kräutertee während Redaktionssitzungen tun.",
+    "https://steadyhq.com/de/luhzeleipzig - Wir machen Zeitung - seit fast 20 Jahren. Unterstütze mit deiner Mitgliedschaft unabhängigen Hochschuljournalismus!",
+    "https://steadyhq.com/de/luhzeleipzig - luhze ist das einzige unabhängige Medium in Leipzig, das über Hochschulpolitik und die Belange Studierender berichtet. Das heißt aber leider nicht, dass wir ohne finanzielle Unterstützung auskommen.",
+    "https://steadyhq.com/de/luhzeleipzig - Damit wir weiterhin kritisch auf die Leipziger Hochschulen blicken und über die Interessen der Studierenden schreiben können, brauchen wir eure Unterstützung.",
+    "https://steadyhq.com/de/luhzeleipzig - Unsere Crowdfunding-Ziele: langfristig unsere Zeitung sichern, Internetpräsenz ausbauen und barrierefreie Onlineinhalte, professionelle Weiterbildung unseres Teams durch Seminare und technische Ausstattung unserer Redaktion erweitern.",
+    "https://steadyhq.com/de/luhzeleipzig - Hinter luhze steht ein Team, das neben dem Studium ehrenamtlich alle Aufgaben übernimmt, die für die Produktion einer Zeitung notwendig sind – bis auf den eigentlichen Druck. Um diesen weiterhin gewährleisten zu können, brauchen wir eure Unterstützung.",
+    "https://steadyhq.com/de/luhzeleipzig - Waschmaschine gesucht, Bett zu verschenken - oder ein Heiratsantrag in der Zeitung? Unterstütze uns mit 10€ pro Monat auf Steady und erhalte eine kostenlose Kleinstanzeige.",
+    "Noch auf der Suche nach Weihnachtsgeschenken? Wir hätten da eine Idee: https://steadyhq.com/de/luhzeleipzig (nicht vergessen das nach Weihnachten auf Geburtstagsgeschenke umzumodeln)",
+    "https://steadyhq.com/de/luhzeleipzig - Schon für den Preis eines veganen Gerichts in der Mensa könnt ihr unabhängigen, jungen Journalismus für Studierende, Hochschulangehörige und alle anderen Leipziger auf Steady unterstützen.",
+    "https://steadyhq.com/de/luhzeleipzig - Jetzt die Journalist*innen von morgen unterstützen: Ehemalige luhze-Redakteur*innen arbeiten heute für bekannte Medien wie FAZ, Mitteldeutsche Zeitung, MDR und taz.",
+    "https://steadyhq.com/de/luhzeleipzig - Bisher unterstützen 39 Steady-Mitglieder luhze - Leipzigs unabhängige Hochschulzeitung mit 200 € im Monat. Werde eine*r von ihnen!",
+    "https://steadyhq.com/de/luhzeleipzig - Kräutertee: Unser Abo für Neugierige. Unterstütze uns mit 3€ pro Monat auf Steady und erhalte als Dankeschön unseren Newsletter mit Hintergrundinfos und Geschichten aus der Redaktion.",
+    "https://steadyhq.com/de/luhzeleipzig - Kräutertee: Unser Abo für Ungeduldige. Unterstütze uns mit 3€ pro Monat auf Steady und erhalte das PDF der Ausgabe zwei Tage vor dem offiziellen Erscheinungstermin.",
+    "https://steadyhq.com/de/luhzeleipzig - Kaffee: Unser Abo für Faule. Unterstütze uns mit 5€ pro Monat auf Steady und luhze kommt zu dir nach Hause (Achtung: nur innerhalb Leipzigs).",
+    "https://steadyhq.com/de/luhzeleipzig - Wein: Unser Abo für Mitteilsame. Unterstütze uns mit 10€ pro Monat auf Steady und erhalte eine kostenlose Kleinstanzeige.",
+    "https://steadyhq.com/de/luhzeleipzig - Steady ist eine Crowdfunding-Plattform für laufende Zahlungen, mit denen Menschen aus der Kreativbranche und unabhängige Medien unterstützt werden sollen.Dazu gehören auch wir: Leipzigs unabhängige Hochschulzeitung.",
+    "https://steadyhq.com/de/luhzeleipzig - Du hast dich schon immer gefragt, was Kräutertee, Kaffee und Wein gemeinsam haben? Wir erklären es auf unserer Steady-Seite.",
+    "https://steadyhq.com/de/luhzeleipzig - Auf unserer Steady-Seite kannst du unabhängigen Journalismus mit nur einem Mausklick und wenigen Euros unterstützen. Dafür bekommst du z.B. Einblicke in unseren Redaktionsalltag (Kräutertee-Abo) oder eine kostenlose Kleinstanzeige (Wein-Abo).",
+    "https://steadyhq.com/de/luhzeleipzig - Bei luhze arbeiten alle ehrenamtlich. Aber auch wir müssen die Miete für unser Büro und vor allem Druckkosten für die Print-Ausgabe zahlen. Unterstütze uns deshalb jetzt mit einem Abo bei steady!",
+    "https://steadyhq.com/de/luhzeleipzig - Dank der Menschen die uns bei steady unterstützen, können wir auch in Corona-Zeiten regelmäßig als Print-Ausgabe erscheinen. Vielen Dank dafür!",
+    "https://steadyhq.com/de/luhzeleipzig - luhze - Das steht für Leipzigs unabhängige Hochschulzeitung. Diese Unabhängigkeit verdanken wir auch unseren steady-Abonnements. Dankeschön!"
+]

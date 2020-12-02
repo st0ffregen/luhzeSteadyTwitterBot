@@ -5,68 +5,64 @@ from datetime import datetime
 import sys
 import os
 from tweetText import tweetArray
+import traceback
+
+
+def updateStatus(api, idFile):
+    print("update status")
+    response = api.update_status(tweetArray[int(datetime.now().strftime('%d')) - 1])
+    print(str(response))
+    f = open(idFile, "w")
+    f.write(str(response.id))
+    f.close()
+    return 0
+
+
+def deleteStatus(api, tweetId, idFile):
+    print("delete status")
+    response = api.destroy_status(tweetId)
+    print(str(response))
+    f = open(idFile, "w")
+    f.write("")
+    f.close()
+    return 0
 
 
 def updateOrDeleteStatus():
+    print("---")
+    print("starting bot")
+    print("utc time now: " + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'))
+    idFile = os.environ['ID_FILE']
+
+    # figure out if we have to update or delete
+    f = open(idFile, "r")
+    tweetId = f.read()
+    f.close()
+
+    # get api
+    oauth = OAuth()
+    api = tweepy.API(oauth)
+
     try:
-        cliArgument = sys.argv[1]
-        idFile = os.environ['ID_FILE']
-    except IndexError as e:
-        print("please specify delete/update")
-        return 1
+        if tweetId == "":
+            updateStatus(api, idFile)
+        else:
+            deleteStatus(api, tweetId, idFile)
 
-    if cliArgument == "update":
+    except tweepy.error.TweepError as err:
+        print(f"error while working with twitter api: {err}")
+        traceback.print_exc()
+        print("exiting")
+        print(sys.exc_info())
+        sys.exit(1)
 
-        oauth = OAuth()
-        api = tweepy.API(oauth)
-
-        response = api.update_status(statusArray[int(datetime.now().strftime('%d'))])
-
-        f = open(idFile, "w")
-        f.write(str(response.id))
-        f.close()
-
-        f = open(logFile, "a")
-        f.write("\n---\n")
-        f.write(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        f.write(" updating \n")
-        f.write(str(response))
-        f.close()
-
-        print(str(response))
-
-    elif cliArgument == "delete":
-        f = open(idFile, "r")
-        tweetId = f.read()
-        f.close()
-
-        oauth = OAuth()
-        api = tweepy.API(oauth)
-
-        response = api.destroy_status(tweetId)
-
-        f = open(logFile, "a")
-        f.write("\n---\n")
-        f.write(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        f.write(" deleting \n")
-        f.write(str(response))
-        f.close()
-
-        print(response)
-
-
-    else:
-        print("please specify if status should be updated or deleted")
+    return 0
 
 
 def OAuth():
-    try:
-        auth = tweepy.OAuthHandler(os.environ['TWITTER_API_KEY'], os.environ['TWITTER_API_SECRET_KEY'])
-        auth.set_access_token(os.environ['TWITTER_ACCESS_TOKEN'], os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
-        return auth
-    except tweepy.error.TweepError as e:
-        print(f"something went wrong while authenticating to twitter: {e}")
-        return 1
+    auth = tweepy.OAuthHandler(os.environ['TWITTER_API_KEY'], os.environ['TWITTER_API_SECRET_KEY'])
+    auth.set_access_token(os.environ['TWITTER_ACCESS_TOKEN'], os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
+    return auth
 
 
 if __name__ == "__main__":

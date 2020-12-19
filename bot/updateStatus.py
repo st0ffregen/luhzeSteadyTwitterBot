@@ -18,10 +18,23 @@ def updateStatus(api, idFile):
     return 0
 
 
+def checkIfTweetShouldBeDeleted(api, tweetId):
+    print("check if tweet should be deleted")
+    status = api.get_status(tweetId)
+    if status.favorite_count >0 or status.retweet_count > 0:
+        return False
+    else:
+        return True
+
+
 def deleteStatus(api, tweetId, idFile):
-    print("delete status")
-    response = api.destroy_status(tweetId)
-    print(str(response))
+    if checkIfTweetShouldBeDeleted(api, tweetId) is True:
+        print("delete status")
+        response = api.destroy_status(tweetId)
+        print(str(response))
+    else:
+        print("do not delete status")
+
     f = open(idFile, "w")
     f.write("")
     f.close()

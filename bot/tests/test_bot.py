@@ -29,10 +29,8 @@ load_dotenv()
 
 class TestBot(unittest.TestCase):
 
-    tweetId = ""
     fileName = os.environ['ID_FILE']
     api = None
-
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -40,25 +38,23 @@ class TestBot(unittest.TestCase):
         auth.set_access_token(os.environ['TWITTER_ACCESS_TOKEN_TESTING'],
                               os.environ['TWITTER_ACCESS_TOKEN_SECRET_TESTING'])
         cls.api = tweepy.API(auth)
-        # generate random string
-        letters = string.ascii_lowercase
-        # edit testing array
-        for i in range(0, len(statusArray)):
-            resultStr = ''.join(random.choice(letters) for i in range(10))
-            statusArray[i] = statusArray[i] + " " + resultStr
 
     def test_init_api(self):
         self.assertIsNotNone(updateStatus.initApi())
 
     def test_update_and_delete_status(self):
-        self.tweetId = updateStatus.updateStatus(TestBot.api, self.fileName, statusArray, random.randint(0, 5))
-        self.assertIsInstance(self.tweetId, str)
-        self.assertEqual(updateStatus.deleteStatus(TestBot.api, self.tweetId, self.fileName), 0)
+        tweetId = updateStatus.updateStatus(TestBot.api, self.fileName, statusArray, random.randint(0, 5))
+        self.assertIsInstance(tweetId, str)
+        self.assertEqual(updateStatus.deleteStatus(TestBot.api, tweetId, self.fileName), 0)
+
+    def test_check_and_do_action(self):
+        self.assertEqual(updateStatus.writeToFile(self.fileName, "update"), 0)
+        self.assertEqual(updateStatus.checkAndDoAction(TestBot.api, self.fileName), 0)
+        self.assertEqual(updateStatus.checkAndDoAction(TestBot.api, self.fileName), 0)
 
     def test_check_likes(self):
         self.assertTrue(updateStatus.checkIfTweetShouldBeDeleted(TestBot.api, normalStatusWithNoLikes))
         self.assertFalse(updateStatus.checkIfTweetShouldBeDeleted(TestBot.api, normalStatusWithLikesAndRetweets))
-
 
 
 if __name__ == "__main__":

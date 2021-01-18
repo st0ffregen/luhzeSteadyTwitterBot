@@ -12,8 +12,8 @@ def updateStatus(api, idFile, tweetArray, index):
     print("update status")
     response = api.update_status(tweetArray[index])
     print(str(response))
-    writeToFile(idFile, str(response.id))
-    return str(response.id)
+    writeToFile(idFile, "delete " + str(response.id))
+    return "delete " + str(response.id)
 
 
 def checkIfTweetShouldBeDeleted(api, tweetId):
@@ -27,6 +27,7 @@ def checkIfTweetShouldBeDeleted(api, tweetId):
 
 
 def deleteStatus(api, tweetId, idFile):
+    tweetId = tweetId.split(" ")[1]
     if checkIfTweetShouldBeDeleted(api, tweetId) is True:
         print("delete status")
         response = api.destroy_status(tweetId)
@@ -34,7 +35,7 @@ def deleteStatus(api, tweetId, idFile):
     else:
         print("do not delete status")
 
-    writeToFile(idFile, "")
+    writeToFile(idFile, "update")
     return 0
 
 
@@ -54,6 +55,28 @@ def writeToFile(fileName, text):
     return 0
 
 
+def checkAndDoAction(api, fileName):
+    tweetId = readInId(fileName)
+    try:
+        if tweetId == "update":
+            updateStatus(api, fileName, tweetText.tweetArray, int(datetime.now().strftime('%d')) - 1)
+        elif "delete" in tweetId:
+            deleteStatus(api, tweetId, fileName)
+
+        else:
+            print("file does not contain a command. exiting")
+            return 1
+
+        return 0
+    except tweepy.error.TweepError as err:
+        print(f"error while working with twitter api: {err}")
+        traceback.print_exc()
+        print("exiting")
+        print(sys.exc_info())
+        sys.exit(1)
+
+
+
 def updateOrDeleteStatus():
     print("---")
     print("starting bot")
@@ -61,20 +84,8 @@ def updateOrDeleteStatus():
 
     api = initApi()
     fileName = os.environ['ID_FILE']
-    tweetId = readInId(fileName)
 
-    try:
-        if tweetId == "":
-            updateStatus(api, fileName, tweetText.tweetArray, int(datetime.now().strftime('%d')) - 1)
-        else:
-            deleteStatus(api, tweetId, fileName)
-
-    except tweepy.error.TweepError as err:
-        print(f"error while working with twitter api: {err}")
-        traceback.print_exc()
-        print("exiting")
-        print(sys.exc_info())
-        sys.exit(1)
+    checkAndDoAction(api, fileName)
 
     return 0
 

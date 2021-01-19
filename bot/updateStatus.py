@@ -4,7 +4,7 @@ import tweepy
 from datetime import datetime
 import sys
 import os
-from bot import tweetText
+import tweetText
 import traceback
 
 
@@ -74,7 +74,6 @@ def checkAndDoAction(api, fileName):
         print("exiting")
         print(sys.exc_info())
         sys.exit(1)
-
 
 
 def updateOrDeleteStatus():

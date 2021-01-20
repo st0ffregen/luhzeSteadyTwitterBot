@@ -20,7 +20,7 @@ def checkIfTweetShouldBeDeleted(api, tweetId):
     print("check if tweet should be deleted")
     status = api.get_status(tweetId)
     print(status)
-    if status.favorite_count > 0 or status.retweet_count > 0:
+    if status.favorite_count > 2 or status.retweet_count > 0:
         return False
     else:
         return True

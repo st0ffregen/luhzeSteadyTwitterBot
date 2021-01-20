@@ -45,7 +45,7 @@ def readInId(fileName):
     f = open(idFile, "r")
     tweetId = f.read()
     f.close()
-    return tweetId
+    return tweetId.strip()
 
 
 def writeToFile(fileName, text):

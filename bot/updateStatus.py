@@ -4,7 +4,7 @@ import tweepy
 from datetime import datetime
 import sys
 import os
-import tweetText
+from bot import tweetText
 import traceback
 
 

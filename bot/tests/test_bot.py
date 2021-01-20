@@ -15,7 +15,8 @@ statusArray = [
     "testing update",
     "testing steady application",
     "testing new app",
-    "testing with tweepy"
+    "testing with tweepy",
+    "testing new application"
 ]
 
 # example stati
@@ -38,6 +39,12 @@ class TestBot(unittest.TestCase):
         auth.set_access_token(os.environ['TWITTER_ACCESS_TOKEN_TESTING'],
                               os.environ['TWITTER_ACCESS_TOKEN_SECRET_TESTING'])
         cls.api = tweepy.API(auth)
+        # generate random string to append to statusArray
+        letters = string.ascii_lowercase
+        # edit testing array
+        for i in range(0, len(statusArray)):
+            resultStr = ''.join(random.choice(letters) for i in range(10))
+            statusArray[i] = statusArray[i] + " " + resultStr
 
     def test_init_api(self):
         self.assertIsNotNone(updateStatus.initApi())

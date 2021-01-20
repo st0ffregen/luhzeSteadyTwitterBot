@@ -27,7 +27,7 @@ def checkIfTweetShouldBeDeleted(api, tweetId):
 
 
 def deleteStatus(api, tweetId, idFile):
-    tweetId = tweetId.split(" ")[1]
+    tweetId = tweetId.split(" ")[1].strip()
     if checkIfTweetShouldBeDeleted(api, tweetId) is True:
         print("delete status")
         response = api.destroy_status(tweetId)

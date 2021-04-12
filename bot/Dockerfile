@@ -1,7 +1,0 @@
-FROM python:3
-WORKDIR /usr/src/app
-COPY . .
-RUN apt-get update
-RUN apt-get install -y python3-pip
-RUN pip3 install tweepy
-CMD ["python", "/usr/src/app/updateStatus.py"]
